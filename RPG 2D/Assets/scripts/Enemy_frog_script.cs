@@ -84,7 +84,7 @@ public class Enemy_frog_script : MonoBehaviour
             m_facingright = false;
 
         if (((m_facingright) && (localScale.x < 0)) || ((!m_facingright) && (localScale.x > 0)))
-            localScale.x *= -1;
+            localScale.x *= -1f;
 
         transform.localScale = localScale;
     }

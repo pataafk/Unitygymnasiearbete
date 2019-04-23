@@ -42,6 +42,9 @@ TagManager:
   - name: background
     uniqueID: 1734993947
     locked: 0
+  - name: TileBackground
+    uniqueID: 3754502517
+    locked: 0
   - name: Ladders
     uniqueID: 3002551063
     locked: 0

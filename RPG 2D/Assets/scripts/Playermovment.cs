@@ -75,4 +75,13 @@ public class Playermovment : MonoBehaviour
         jump = false;
 
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("gem-1"))
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
 }
+

@@ -81,6 +81,7 @@ public class Playermovment : MonoBehaviour
         if (other.gameObject.CompareTag("gem-1"))
         {
             other.gameObject.SetActive(false);
+            Debug.Log("holla");
         }
     }
 }

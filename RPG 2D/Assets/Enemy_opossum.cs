@@ -8,9 +8,11 @@ public class Enemy_opossum : MonoBehaviour
     public float speed;
     public float distance;
 
-    private bool movingRight = false;
+    private bool movingRight = true;
 
     public Transform groundDetection;
+
+    public Transform headDetection;
 
     void Update()
     {
@@ -18,17 +20,27 @@ public class Enemy_opossum : MonoBehaviour
 
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
 
+
+
         if (groundInfo.collider == false)
         {
             if (movingRight == true)
             {
-                transform.eulerAngles = new Vector3(0, 100, 0);
+                transform.eulerAngles = new Vector3(0, -180, 0);
                 movingRight = false;
             }
             else
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
             }
         }
+
+        
+    }
+
+    public void Hurt()
+    {
+        Destroy(this.gameObject);
     }
 }

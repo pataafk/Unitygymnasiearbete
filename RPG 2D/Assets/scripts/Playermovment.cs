@@ -28,6 +28,11 @@ public class Playermovment : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
+    //combat
+    public int health = 3;
+    public float invinsible = 2;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -82,6 +87,62 @@ public class Playermovment : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Debug.Log("holla");
+        }
+    }
+
+
+    public void TriggerHurt(float hurtTime)
+    {
+        StartCoroutine(HurtBlinker(hurtTime));
+    }
+
+    IEnumerator HurtBlinker(float hurtTime)
+    {
+        //ignore collision with enemies
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        int playerLayer = LayerMask.NameToLayer("Player");
+        Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer);
+        foreach (Collider2D collider in CharacterController2D.instance.myColl)
+        {
+            collider.enabled = false;
+            collider.enabled = true;
+        }
+
+        //wait for invincebility to end
+        yield return new WaitForSeconds(hurtTime);
+
+        //re-eneable collision
+        Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer, false);
+    }
+
+    void Hurt()
+    {
+        health--;
+        if (health <= 0)
+            Application.LoadLevel(Application.loadedLevel);
+        else
+            TriggerHurt(invinsible);
+    }
+
+
+    void onCollisionEnter2D(Collision2D collision)
+    {
+        enemy_test enemy = collision.collider.GetComponent<enemy_test>();
+        if(enemy != null)
+        {
+            foreach(ContactPoint2D point in collision.contacts)
+            {
+                Debug.DrawLine(point.point, point.point + point.normal, Color.red, 10);
+                if ( point.normal.y >= 0.9f)
+                {
+                    enemy.Hurt();
+                }
+                else
+                {
+                    Hurt();
+                }
+            }
+
         }
     }
 }

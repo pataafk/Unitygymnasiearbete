@@ -22,8 +22,10 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+    public static CharacterController2D instance;
+    public Collider2D[] myColl;
 
-	[Header("Events")]
+    [Header("Events")]
 	[Space]
 
 	public UnityEvent OnLandEvent;
@@ -36,6 +38,10 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
+        myColl = this.GetComponents<Collider2D>();
+
+        instance = this;
+
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
 		if (OnLandEvent == null)

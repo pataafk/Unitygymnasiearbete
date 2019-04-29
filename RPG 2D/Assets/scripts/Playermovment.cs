@@ -119,18 +119,23 @@ public class Playermovment : MonoBehaviour
     {
         health--;
         if (health <= 0)
+        {
+            health = 3;
             Application.LoadLevel(Application.loadedLevel);
+        }
         else
             TriggerHurt(invinsible);
     }
 
 
-    void onCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         enemy_test enemy = collision.collider.GetComponent<enemy_test>();
         if(enemy != null)
         {
-            foreach(ContactPoint2D point in collision.contacts)
+            
+            
+            foreach (ContactPoint2D point in collision.contacts)
             {
                 Debug.DrawLine(point.point, point.point + point.normal, Color.red, 10);
                 if ( point.normal.y >= 0.9f)
@@ -139,11 +144,13 @@ public class Playermovment : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("dö");
                     Hurt();
                 }
             }
 
         }
     }
+    
 }
 

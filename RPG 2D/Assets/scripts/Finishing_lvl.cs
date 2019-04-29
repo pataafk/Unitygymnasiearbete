@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Finishing_lvl : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
             Debug.Log("holla");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

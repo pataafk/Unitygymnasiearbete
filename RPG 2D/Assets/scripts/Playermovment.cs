@@ -121,7 +121,7 @@ public class Playermovment : MonoBehaviour
         if (health <= 0)
         {
             health = 3;
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else
             TriggerHurt(invinsible);

@@ -88,4 +88,8 @@ public class Enemy_frog_script : MonoBehaviour
 
         transform.localScale = localScale;
     }
+    public void Hurt()
+    {
+        Destroy(this.gameObject);
+    }
 }

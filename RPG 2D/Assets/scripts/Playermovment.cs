@@ -101,7 +101,7 @@ public class Playermovment : MonoBehaviour
         //ignore collision with enemies
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         int playerLayer = LayerMask.NameToLayer("Player");
-        Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer);
+        Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer, true);
         foreach (Collider2D collider in CharacterController2D.instance.myColl)
         {
             collider.enabled = false;
@@ -120,8 +120,9 @@ public class Playermovment : MonoBehaviour
         health--;
         if (health <= 0)
         {
-            health = 3;
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            health = 3;
         }
         else
             TriggerHurt(invinsible);
